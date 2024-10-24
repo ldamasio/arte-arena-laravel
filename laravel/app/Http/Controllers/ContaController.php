@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class ContaController extends Controller
 {
+    public function __construct() {
+        // Associa permissões da ContaPolicy aos métodos deste Controller
+        $this->authorizeResource(Conta::class, 'conta');
+    }
+
     /**
      * Display a listing of the resource.
      */
