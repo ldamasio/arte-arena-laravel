@@ -46,4 +46,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Associa as contas aos usuários.
+     */
+    public function contas()
+    {
+        return $this->hasMany(Conta::class);
+    }
 }
