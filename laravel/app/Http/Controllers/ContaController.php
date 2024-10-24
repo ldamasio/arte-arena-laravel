@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Conta;
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+// use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
 
 class ContaController extends Controller
 {
-    use AuthorizesRequests;
+    // use AuthorizesRequests;
 
     public function __construct() {
         // Associa permissões da ContaPolicy aos métodos deste Controller
-        $this->authorizeResource(Conta::class, 'conta');
+        // $this->authorizeResource(Conta::class, 'conta');
+        // $this->middleware('auth');
     }
 
     /**
@@ -52,7 +54,7 @@ class ContaController extends Controller
         $conta->valor = $validatedData['valor'];
         $conta->data_vencimento = $validatedData['data_vencimento'];
         $conta->status = $validatedData['status'];
-        $conta->user_id = auth()->id(); // O ID do usuário autenticado
+        $conta->user_id = Auth::id(); // O ID do usuário autenticado
 
         $conta->save();
 
