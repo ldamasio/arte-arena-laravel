@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Conta;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class ContaController extends Controller
 {
+    use AuthorizesRequests;
+    
     public function __construct() {
         // Associa permissões da ContaPolicy aos métodos deste Controller
         $this->authorizeResource(Conta::class, 'conta');
