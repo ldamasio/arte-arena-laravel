@@ -4,9 +4,13 @@ namespace App\Policies;
 
 use App\Models\User;
 use App\Models\Conta;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ContaPolicy
 {
+
+    use HandlesAuthorization;
+
     /**
      * Create a new policy instance.
      */
