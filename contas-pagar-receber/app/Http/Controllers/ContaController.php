@@ -6,9 +6,12 @@ use App\Models\Conta;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class ContaController extends Controller
 {
+    use AuthorizesRequests;
+    
     public function __construct()
     {
         // Autoriza automaticamente as ações com base na ContaPolicy
