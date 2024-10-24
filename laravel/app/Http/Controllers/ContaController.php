@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class ContaController extends Controller
 {
     use AuthorizesRequests;
-    
+
     public function __construct() {
         // Associa permissões da ContaPolicy aos métodos deste Controller
         $this->authorizeResource(Conta::class, 'conta');
@@ -36,7 +36,27 @@ class ContaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validação de dados para evitar XSS e SQL Injection
+        $validatedData = $request->validate([
+            'titulo' => 'required|string|max:255',
+            'descricao' => 'nullable|string',
+            'valor' => 'required|numeric',
+            'data_vencimento' => 'required|date',
+            'status' => 'required|in:pago,pendente',
+        ]);
+
+        // Criação de uma nova conta com os dados validados
+        $conta = new Conta();
+        $conta->titulo = $validatedData['titulo'];
+        $conta->descricao = $validatedData['descricao'] ?? null;
+        $conta->valor = $validatedData['valor'];
+        $conta->data_vencimento = $validatedData['data_vencimento'];
+        $conta->status = $validatedData['status'];
+        $conta->user_id = auth()->id(); // O ID do usuário autenticado
+
+        $conta->save();
+
+        return redirect()->route('contas.index')->with('success', 'Conta criada com sucesso!');
     }
 
     /**
@@ -58,9 +78,27 @@ class ContaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Conta $conta)
     {
-        //
+    // Validação de dados para evitar XSS e SQL Injection
+    $validatedData = $request->validate([
+        'titulo' => 'required|string|max:255',
+        'descricao' => 'nullable|string',
+        'valor' => 'required|numeric',
+        'data_vencimento' => 'required|date',
+        'status' => 'required|in:pago,pendente',
+    ]);
+
+    // Atualizando a conta com os dados validados
+    $conta->titulo = $validatedData['titulo'];
+    $conta->descricao = $validatedData['descricao'] ?? null;
+    $conta->valor = $validatedData['valor'];
+    $conta->data_vencimento = $validatedData['data_vencimento'];
+    $conta->status = $validatedData['status'];
+
+    $conta->save();
+
+    return redirect()->route('contas.index')->with('success', 'Conta atualizada com sucesso!');
     }
 
     /**
