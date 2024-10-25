@@ -24,8 +24,13 @@ class ContaController extends Controller
      */
     public function index()
     {
-        $contas = Conta::all();
-
+        // Verifica a role do usuário autenticado
+        if (Auth::user()->role === 'admin') {
+            $contas = Conta::all(); // Admin pode ver todas as contas
+        } else {
+            $contas = Conta::where('user_id', Auth::id())->get(); // Usuário comum vê apenas suas contas
+        }
+    
         return view('contas.index', compact('contas'));
     }
 

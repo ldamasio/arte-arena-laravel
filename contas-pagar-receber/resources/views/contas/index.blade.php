@@ -2,10 +2,9 @@
 
 @section('content')
 <div class="container mx-auto my-8">
-    <table class="table-auto border-collapse w-full">
-        <thead>
+    <table class="text-gray-400 table-auto border-collapse w-full">
+        <thead class="text-left text-gray-200">
             <tr>
-                <th>ID</th>
                 <th>Título</th>
                 <th>Descrição</th>
                 <th>Valor</th>
@@ -16,7 +15,6 @@
         <tbody>
             @foreach ($contas as $conta)
             <tr>
-                <td>{{ $conta->id }}</td>
                 <td>{{ $conta->titulo }}</td>
                 <td>{{ $conta->descricao }}</td>
                 <td>{{ $conta->valor }}</td>
