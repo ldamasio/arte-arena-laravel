@@ -1,36 +1,36 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Criar Nova Conta</title>
-</head>
-<body>
-    <h1>Criar Nova Conta</h1>
+@extends('layouts.app')
+
+@section('content')
+<div class="container mx-auto">
+    <h1 class="text-gray-500 text-center mb-8">Criar Nova Conta</h1>
     <form method="POST" action="{{ route('contas.store') }}">
         @csrf
-        <div class="form-group">
-            <label for="titulo">Título:</label>
-            <input type="text" class="form-control" id="titulo" name="titulo" required>
+        <div class="space-y-4">
+            <div>
+                <label for="titulo" class="block text-gray-50 text-sm font-bold mb-2">Título:</label>
+                <input type="text" class="border border-gray-300 rounded-md w-full" id="titulo" name="titulo" required>
+            </div>
+            <div>
+                <label for="descricao" class="block text-gray-50 text-sm font-bold mb-2">Descrição:</label>
+                <textarea class="border border-gray-300 rounded-md w-full" id="descricao" name="descricao" rows="3"></textarea>
+            </div>
+            <div>
+                <label for="valor" class="block text-gray-50 text-sm font-bold mb-2">Valor:</label>
+                <input type="number" step="0.01" class="border border-gray-300 rounded-md w-full" id="valor" name="valor" required>
+            </div>
+            <div>
+                <label for="data_vencimento" class="block text-gray-50 text-sm font-bold mb-2">Data de Vencimento:</label>
+                <input type="date" class="border border-gray-300 rounded-md w-full" id="data_vencimento" name="data_vencimento" required>
+            </div>
+            <div>
+                <label for="status" class="block text-gray-50 text-sm font-bold mb-2">Status:</label>
+                <select class="border border-gray-300 rounded-md w-full" id="status" name="status">
+                    <option value="pago">Pago</option>
+                    <option value="pendente">Pendente</option>
+                </select>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="descricao">Descrição:</label>
-            <textarea class="form-control" id="descricao" name="descricao"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="valor">Valor:</label>
-            <input type="number" class="form-control" id="valor" name="valor" required>
-        </div>
-        <div class="form-group">
-            <label for="data_vencimento">Data de Vencimento:</label>
-            <input type="date" class="form-control" id="data_vencimento" name="data_vencimento" required>
-        </div>
-        <div class="form-group">
-            <label for="status">Status:</label>
-            <select class="form-control" id="status" name="status">
-                <option value="pago">Pago</option>
-                <option value="pendente">Pendente</option>
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Criar Conta</button>
+        <button type="submit" class="btn bg-green-500 text-white mt-4">Criar Conta</button>
     </form>
-</body>
-</html>
+</div>
+@endsection
