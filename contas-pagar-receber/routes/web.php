@@ -17,7 +17,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::resource('contas', ContaController::class);
+    Route::get('/contas', [ContaController::class, 'index']);
+    Route::get('/criar-conta', [ContaController::class, 'create'])->name('criar.conta');
+    Route::get('/contas/criada', function () { return view('contas.criada'); })->name('contas.criada');
 
 });
 

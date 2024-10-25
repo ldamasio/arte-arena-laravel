@@ -24,7 +24,9 @@ class ContaController extends Controller
      */
     public function index()
     {
-        //
+        $contas = Conta::all();
+
+        return view('contas.index', compact('contas'));
     }
 
     /**
@@ -32,7 +34,7 @@ class ContaController extends Controller
      */
     public function create()
     {
-        //
+        return view('contas.create');
     }
 
     /**
@@ -60,7 +62,7 @@ class ContaController extends Controller
 
         $conta->save();
 
-        return redirect()->route('contas.index')->with('success', 'Conta criada com sucesso!');
+        return redirect()->route('contas.criada')->with('success', 'Conta criada com sucesso!');
     }
 
     /**

@@ -8,7 +8,6 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ContaPolicy
 {
-
     use HandlesAuthorization;
 
     /**
@@ -30,18 +29,18 @@ class ContaPolicy
     }
     
     public function create(User $user) {
-        // Usuários comuns podem criar contas
-        return $user->role === 'user';
+        // Tanto usuários comuns quanto admins podem criar contas
+        return true;
     }
     
     public function update(User $user, Conta $conta) {
-        // Usuários só podem editar suas próprias contas
-        return $user->id === $conta->user_id;
+        // Admins podem atualizar qualquer conta, usuários comuns apenas as suas
+        return $user->role === 'admin' || $user->id === $conta->user_id;
     }
     
     public function delete(User $user, Conta $conta) {
-        // Usuários só podem excluir suas próprias contas
-        return $user->id === $conta->user_id;
+        // Admins podem excluir qualquer conta, usuários comuns apenas as suas
+        return $user->role === 'admin' || $user->id === $conta->user_id;
     }
 
 }
