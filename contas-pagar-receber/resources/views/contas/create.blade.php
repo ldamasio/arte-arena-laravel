@@ -12,23 +12,23 @@
         <div class="space-y-4">
             <div>
                 <label for="titulo" class="block text-gray-50 text-sm font-bold mb-2">Título:</label>
-                <input type="text" class="border border-gray-300 rounded-md w-full" id="titulo" name="titulo" required>
+                <input type="text" class="border border-gray-600 rounded-md w-full bg-gray-200 text-gray-700" id="titulo" name="titulo" required>
             </div>
             <div>
                 <label for="descricao" class="block text-gray-50 text-sm font-bold mb-2">Descrição:</label>
-                <textarea class="border border-gray-300 rounded-md w-full" id="descricao" name="descricao" rows="3"></textarea>
+                <textarea class="border border-gray-600 rounded-md w-full bg-gray-200 text-gray-700" id="descricao" name="descricao" rows="3"></textarea>
             </div>
             <div>
                 <label for="valor" class="block text-gray-50 text-sm font-bold mb-2">Valor:</label>
-                <input type="number" step="0.01" class="border border-gray-300 rounded-md w-full" id="valor" name="valor" required>
+                <input type="number" step="0.01" class="border border-gray-600 rounded-md w-full bg-gray-200 text-gray-700" id="valor" name="valor" required>
             </div>
             <div>
                 <label for="data_vencimento" class="block text-gray-50 text-sm font-bold mb-2">Data de Vencimento:</label>
-                <input type="date" class="border border-gray-300 rounded-md w-full" id="data_vencimento" name="data_vencimento" required>
+                <input type="date" class="border border-gray-600 rounded-md w-full bg-gray-200 text-gray-700" id="data_vencimento" name="data_vencimento" required>
             </div>
             <div>
                 <label for="status" class="block text-gray-50 text-sm font-bold mb-2">Status:</label>
-                <select class="border border-gray-300 rounded-md w-full" id="status" name="status">
+                <select class="border border-gray-600 rounded-md w-full bg-gray-200 text-gray-700" id="status" name="status">
                     <option value="pago">Pago</option>
                     <option value="pendente">Pendente</option>
                 </select>
