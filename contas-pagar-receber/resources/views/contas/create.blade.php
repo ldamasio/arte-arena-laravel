@@ -1,8 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto">
-    <h1 class="text-gray-500 text-center mb-8">Criar Nova Conta</h1>
+<div class="container mx-auto p-4">
+    <div class="p-4">
+        <h1 class="text-gray-500 text-center mb-8">
+            Criar Nova Conta
+        </h1>
+    </div>
     <form method="POST" action="{{ route('contas.store') }}">
         @csrf
         <div class="space-y-4">
@@ -30,7 +34,7 @@
                 </select>
             </div>
         </div>
-        <button type="submit" class="btn bg-green-500 text-white mt-4">Criar Conta</button>
+        <button type="submit" class="py-2 px-6 btn bg-green-500 text-white mt-4 mb-8">Criar Conta</button>
     </form>
 </div>
 @endsection
