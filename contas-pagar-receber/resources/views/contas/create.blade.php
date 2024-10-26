@@ -34,7 +34,9 @@
                 </select>
             </div>
         </div>
-        <button type="submit" class="py-2 px-6 btn bg-green-500 text-white mt-4 mb-8">Criar Conta</button>
+        <button type="submit" class="py-2 px-6 btn bg-green-500 text-white mt-4 mb-8">
+            Criar Conta
+        </button>
     </form>
 </div>
 @endsection
