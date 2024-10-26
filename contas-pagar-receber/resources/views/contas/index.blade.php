@@ -11,7 +11,8 @@
                     <th class="py-2">Valor</th>
                     <th class="py-2">Data Vencimento</th>
                     <th class="py-2">Status</th>
-                    <th class="py-2">Usuario</th>
+                    <th class="py-2">Usuário</th>
+                    <th class="py-2">Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,6 +24,14 @@
                     <td>{{ $conta->data_vencimento }}</td>
                     <td>{{ $conta->status }}</td>
                     <td>{{ $conta->user->name }}</td>
+                    <td>
+                        <a href="{{ route('contas.edit', $conta->id) }}" class="text-blue-400 hover:text-blue-600">Editar</a>
+                        <form action="{{ route('contas.destroy', $conta->id) }}" method="POST" class="inline-block">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-red-400 hover:text-red-600">Excluir</button>
+                        </form>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>

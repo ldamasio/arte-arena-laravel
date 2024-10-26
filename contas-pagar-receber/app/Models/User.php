@@ -63,5 +63,5 @@ class User extends Authenticatable
     {
         return $this->hasMany(Conta::class)->where('status', 'pendente');
     }
-
+    
 }
