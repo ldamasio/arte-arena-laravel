@@ -120,4 +120,36 @@ class ContaController extends Controller
     {
         //
     }
+    public function relatorios()
+    {
+        // Verifica se o usuário é admin
+        if (Auth::user()->role !== 'admin') {
+            return redirect()->route('dashboard')->with('error', 'Acesso não autorizado.');
+        }
+    
+        // Lógica para gerar relatórios gerais
+        $totalContas = Conta::count();
+        $totalPago = Conta::where('status', 'pago')->sum('valor');
+        $totalPendente = Conta::where('status', 'pendente')->sum('valor');
+    
+        // Lógica para gerar relatórios por usuário
+        $usuarios = \App\Models\User::with(['contas' => function($query) {
+            $query->select('user_id', 'status', \DB::raw('SUM(valor) as total_valor'))
+                  ->groupBy('user_id', 'status');
+        }])->get();
+    
+        $relatoriosPorUsuario = $usuarios->map(function($usuario) {
+            $totalPagoUsuario = $usuario->contas->where('status', 'pago')->sum('total_valor');
+            $totalPendenteUsuario = $usuario->contas->where('status', 'pendente')->sum('total_valor');
+    
+            return [
+                'nome' => $usuario->name,
+                'totalPago' => $totalPagoUsuario,
+                'totalPendente' => $totalPendenteUsuario,
+            ];
+        });
+    
+        return view('contas.relatorios', compact('totalContas', 'totalPago', 'totalPendente', 'relatoriosPorUsuario'));
+    }
+    
 }

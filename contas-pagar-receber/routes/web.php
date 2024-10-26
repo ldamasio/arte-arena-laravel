@@ -20,16 +20,13 @@ Route::middleware('auth')->group(function () {
     Route::middleware(['auth'])->group(function () {
         Route::get('/contas', [ContaController::class, 'index'])->name('contas.index');
     });
-    // Route::get('/contas', function () {
-    //     return view('contas.index');
-    // })->middleware(['auth', 'can:viewAny,App\Models\Conta']);
-    // Route::get('/contas/{conta}', function (Conta $conta) {
-    //     return view('contas.show', compact('conta'));
-    // })->middleware(['auth', 'can:view,conta']);
     Route::get('/criar-conta', [ContaController::class, 'create'])->name('criar.conta');
     Route::post('/criar-conta', [ContaController::class, 'store'])->name('contas.store');
     Route::get('/contas/criada', function () { return view('contas.criada'); })->name('contas.criada');
-
+    Route::get('/relatorios', [ContaController::class, 'relatorios'])->name('contas.relatorios');
+    // Route::get('/contas/{conta}', function (Conta $conta) {
+    //     return view('contas.show', compact('conta'));
+    // })->middleware(['auth', 'can:view,conta']);
 });
 
 require __DIR__.'/auth.php';

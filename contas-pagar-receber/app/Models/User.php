@@ -53,4 +53,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(Conta::class);
     }
+
+    public function contasPagas()
+    {
+        return $this->hasMany(Conta::class)->where('status', 'pago');
+    }
+    
+    public function contasPendentes()
+    {
+        return $this->hasMany(Conta::class)->where('status', 'pendente');
+    }
+
 }
