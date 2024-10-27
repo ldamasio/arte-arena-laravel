@@ -125,25 +125,40 @@ class ContaController extends Controller
         // Lógica para gerar relatórios gerais
         $totalContas = Conta::count();
         $totalPago = Conta::where('status', 'pago')->sum('valor');
-        $totalPendente = Conta::where('status', 'pendente')->sum('valor');
+        $totalRecebido = Conta::where('status', 'recebido')->sum('valor');
 
+        // Relatórios por tipo
+        $totalAPagar = Conta::where('tipo', 'a pagar')->sum('valor');
+        $totalAReceber = Conta::where('tipo', 'a receber')->sum('valor');
+
+        // Novos cálculos para pendentes
+        $totalPendenteAPagar = Conta::where('status', 'pendente')->where('tipo', 'a pagar')->sum('valor');
+        $totalPendenteAReceber = Conta::where('status', 'pendente')->where('tipo', 'a receber')->sum('valor');
         // Lógica para gerar relatórios por usuário
         $usuarios = \App\Models\User::with(['contas' => function ($query) {
-            $query->select('user_id', 'status', \Illuminate\Support\Facades\DB::raw('SUM(valor) as total_valor')) //+
-                ->groupBy('user_id', 'status');
+            $query->select('user_id', 'status', 'tipo', \Illuminate\Support\Facades\DB::raw('SUM(valor) as total_valor'))
+                ->groupBy('user_id', 'status', 'tipo');
         }])->get();
 
         $relatoriosPorUsuario = $usuarios->map(function ($usuario) {
             $totalPagoUsuario = $usuario->contas->where('status', 'pago')->sum('total_valor');
-            $totalPendenteUsuario = $usuario->contas->where('status', 'pendente')->sum('total_valor');
+            $totalRecebidoUsuario = $usuario->contas->where('status', 'recebido')->sum('total_valor');
+            $totalPendenteAPagarUsuario = $usuario->contas->where('status', 'pendente')->where('tipo', 'a pagar')->sum('total_valor');
+            $totalPendenteAReceberUsuario = $usuario->contas->where('status', 'pendente')->where('tipo', 'a receber')->sum('total_valor');
+            $totalAPagarUsuario = $usuario->contas->where('tipo', 'a pagar')->sum('total_valor');
+            $totalAReceberUsuario = $usuario->contas->where('tipo', 'a receber')->sum('total_valor');
 
             return [
                 'nome' => $usuario->name,
                 'totalPago' => $totalPagoUsuario,
-                'totalPendente' => $totalPendenteUsuario,
+                'totalRecebido' => $totalRecebidoUsuario,
+                'totalPendenteAPagar' => $totalPendenteAPagarUsuario,
+                'totalPendenteAReceber' => $totalPendenteAReceberUsuario,
+                'totalAPagar' => $totalAPagarUsuario,
+                'totalAReceber' => $totalAReceberUsuario,
             ];
         });
 
-        return view('contas.relatorios', compact('totalContas', 'totalPago', 'totalPendente', 'relatoriosPorUsuario'));
+        return view('contas.relatorios', compact('totalContas', 'totalPago', 'totalRecebido', 'totalPendenteAPagar', 'totalPendenteAReceber', 'totalAPagar', 'totalAReceber', 'relatoriosPorUsuario'));
     }
 }

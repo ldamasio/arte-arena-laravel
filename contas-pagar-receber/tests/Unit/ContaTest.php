@@ -30,6 +30,7 @@ class ContaTest extends TestCase
             'valor' => 100.00,
             'data_vencimento' => now()->addDays(10),
             'status' => 'pendente',
+            'tipo' => 'a pagar',
         ]);
         
         // Verifica se foi redirecionado corretamente
