@@ -13,6 +13,12 @@ Startup Kit do Laravel: Breeze
 
 # Intalação do Sistema
 
+## Clonando o repositório
+
+`git clone https://github.com/ldamasio/arte-arena-laravel.git`
+
+Após clonar o repositório, entre no diretório do projeto: `cd arte-arena-laravel` (ou use o comando apropriado do seu sistema operacional).
+
 ## Instalação das dependências do Backend
 
 ### No Linux:
