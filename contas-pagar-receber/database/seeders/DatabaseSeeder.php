@@ -40,6 +40,7 @@ class DatabaseSeeder extends Seeder
             'valor' => 3500.00,
             'data_vencimento' => '2023-08-31',
             'status' => 'pago',
+            'tipo' => 'a pagar',
         ]);
         $gabriel->contas()->create([
             'titulo' => 'Aluguel',
@@ -47,6 +48,7 @@ class DatabaseSeeder extends Seeder
             'valor' => 1500.00,
             'data_vencimento' => '2024-12-31',
             'status' => 'pendente',
+            'tipo' => 'a pagar',
         ]);
         $gabriel->contas()->create([
             'titulo' => 'IRPF',
@@ -54,6 +56,7 @@ class DatabaseSeeder extends Seeder
             'valor' => 400.00,
             'data_vencimento' => '2024-12-31',
             'status' => 'pendente',
+            'tipo' => 'a pagar',
         ]);
 
         // Criando contas para Gabriel
@@ -63,6 +66,7 @@ class DatabaseSeeder extends Seeder
             'valor' => 200.00,
             'data_vencimento' => '2023-12-10',
             'status' => 'pago',
+            'tipo' => 'a pagar',
         ]);
         $rogerioCeni->contas()->create([
             'titulo' => 'material de escritório',
@@ -70,13 +74,23 @@ class DatabaseSeeder extends Seeder
             'valor' => 163.00,
             'data_vencimento' => '2021-12-20',
             'status' => 'pago',
+            'tipo' => 'a pagar',
         ]);
         $rogerioCeni->contas()->create([
-            'titulo' => 'Projeto Bandeira',
+            'titulo' => 'Projeto Bandeira SPFC',
             'descricao' => 'Contratação de serviço',
             'valor' => 610.00,
             'data_vencimento' => '2025-01-13',
             'status' => 'pendente',
+            'tipo' => 'a receber',
+        ]);
+        $rogerioCeni->contas()->create([
+            'titulo' => 'Projeto Canecas Tigre',
+            'descricao' => 'Contratação de serviço',
+            'valor' => 347.00,
+            'data_vencimento' => '2025-02-03',
+            'status' => 'recebido',
+            'tipo' => 'a receber',
         ]);
     }
 }
