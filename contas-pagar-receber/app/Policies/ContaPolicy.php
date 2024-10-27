@@ -21,7 +21,7 @@ class ContaPolicy
     public function viewAny(User $user)
     {
         // Admin pode ver todas as contas
-        return $user->role === 'admin';
+        return $user->role === 'admin' || $user->id;
     }
 
     public function view(User $user, Conta $conta)
