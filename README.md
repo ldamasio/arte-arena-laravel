@@ -75,3 +75,25 @@ gabriel@artearena.com.br e rogerio@artearena.com.br - As senhas desses usuários
 
 O comando `php artisan db:seed` é usado para popular o banco de dados com dados de teste, e o comando `php artisan serve` é usado para iniciar um servidor de desenvolvimento local para seu aplicativo Laravel.
 
+Por fim, acesse o sistema em http://localhost:8000
+
+# Instruções para utilização do sistema
+
+## Login
+
+A tela inicial do sistema fornece dois botões: Login e Cadastro. 
+
+Usando a opção de login, você pode utilizar os usuários criados anteriormente para efetuar o login.
+
+Já o botão Cadastro abre uma página para cdastrar um novo usuário.
+
+## Menu Superior
+
+O menu superior contém as opções de Listar Contas, Adicionar Conta e Relatórios.
+
+O item Relatório será exibiddo apenas para usuários com papel de administrador.
+
+Listar Conta: Abre uma página com uma lista de contas cadastradas.
+
+Adicionar Conta: Abre uma página para cadastrar uma nova conta.
+
