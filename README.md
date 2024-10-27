@@ -36,13 +36,13 @@ npm i
 npm run build
 ```
 
-# Rodar as migrações
+### Rodar as migrações
 `php artisan migrate`
 
-# Executar Testes automatizados
+### Executar Testes automatizados
 `php artisan test`
 
-# Inicializar o Sistema
+### Inicializar o Sistema
 
 ```
 php artisan db:seed
