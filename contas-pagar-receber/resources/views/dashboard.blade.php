@@ -8,7 +8,7 @@
         </div>
     </h2>
     <div class="card-body text-white p-4"
-        style="background-color: {{ auth()->user()->role === 'admin' ? '#38a169' : '#6b7280' }};">
+        style="background-color: {{ auth()->user()->role === 'admin' ? '#38a169' : '#23252a' }};">
         @if(auth()->user()->role === 'admin')
         Você é um admin!
         @elseif(auth()->user()->role === 'user')
