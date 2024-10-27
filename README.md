@@ -30,7 +30,6 @@ pecl install mbstring curl xml json gd
 brew install node
 ```
 
-
 # Intalação do Sistema
 ```
 npm i
@@ -49,3 +48,10 @@ npm run build
 php artisan db:seed
 php artisan serve
 ```
+
+Ao inicializar o sistema dessa forma, você terá dois usuários iniciais: 
+
+gabriel@artearena.com.br e rogerio@artearena.com.br - As senhas desses usuários é a mesma: `artearena`
+
+O comando `php artisan db:seed` é usado para popular o banco de dados com dados de teste, e o comando `php artisan serve` é usado para iniciar um servidor de desenvolvimento local para seu aplicativo Laravel.
+
