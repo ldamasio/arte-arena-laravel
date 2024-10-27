@@ -11,6 +11,13 @@
         @csrf
         @method('PUT')
         <div class="space-y-4">
+            <div class="form-row">
+                <label for="tipo" class="block text-gray-50 text-sm font-bold mb-2">Tipo</label>
+                <select name="tipo" id="tipo" class="form-control border-gray-50 rounded-md w-full bg-gray-600 text-white" required>
+                    <option value="a pagar" {{ old('tipo', $conta->tipo ?? '') == 'a pagar' ? 'selected' : '' }}>A pagar</option>
+                    <option value="a receber" {{ old('tipo', $conta->tipo ?? '') == 'a receber' ? 'selected' : '' }}>A receber</option>
+                </select>
+            </div>
             <div>
                 <label for="titulo" class="block text-gray-50 text-sm font-bold mb-2">Título</label>
                 <input id="titulo" type="text" class="border border-gray-50 rounded-md w-full bg-gray-600 text-white" name="titulo" value="{{ old('titulo', $conta->titulo) }}" required>
@@ -28,36 +35,77 @@
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
-            </div>
-            <div class="form-row">
-                <label for="data_vencimento" class="block text-gray-50 text-sm font-bold mb-2">Data de Vencimento</label>
-                <div class="col-md-6">
-                    <input id="data_vencimento" type="date" class="form-control @error('data_vencimento') is-invalid @enderror border border-gray-50 rounded-md w-full bg-gray-600 text-white" name="data_vencimento" value="{{ old('data_vencimento', $conta->data_vencimento) }}" required>
-                    @error('data_vencimento')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
+                </div>
+                <div class="form-row">
+                    <label for="data_vencimento" class="block text-gray-50 text-sm font-bold mb-2">Data de Vencimento</label>
+                    <div class="col-md-6">
+                        <input id="data_vencimento" type="date" class="form-control @error('data_vencimento') is-invalid @enderror border border-gray-50 rounded-md w-full bg-gray-600 text-white" name="data_vencimento" value="{{ old('data_vencimento', $conta->data_vencimento) }}" required>
+                        @error('data_vencimento')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="status" class="block text-gray-50 text-sm font-bold mb-2">Status</label>
+                    <div class="col-md-6">
+                        <select class="border border-gray-50 rounded-md w-full bg-gray-600 text-white" id="status" name="status">
+                            <option value="pendente" {{ old('status', $conta->status) == 'pendente' ? 'selected' : '' }}>Pendente</option>
+                            <option value="pago" {{ old('status', $conta->status) == 'pago' ? 'selected' : '' }}>Pago</option>
+                            <option value="recebido" {{ old('status', $conta->status) == 'recebido' ? 'selected' : '' }}>Recebido</option>
+                        </select>
+                        @error('status')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
                 </div>
             </div>
-            <div class="form-row">
-                <label for="status" class="block text-gray-50 text-sm font-bold mb-2">Status</label>
-                <div class="col-md-6">
-                    <select id="status" class="form-control @error('status') is-invalid @enderror border border-gray-50 rounded-md w-full bg-gray-600 text-white" name="status" required>
-                        <option value="pago" {{ $conta->status == 'pago' ? 'selected' : '' }}>Pago</option>
-                        <option value="pendente" {{ $conta->status == 'pendente' ? 'selected' : '' }}>Pendente</option>
-                    </select>
-                    @error('status')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-            </div>
-        </div>
-        <button type="submit" class="py-2 px-6 btn bg-green-500 text-white mt-4 mb-8">
-            {{ __('Atualizar Conta') }}
-        </button>
+            <button type="submit" class="py-2 px-6 btn bg-green-500 text-white mt-4 mb-8">
+                {{ __('Atualizar Conta') }}
+            </button>
     </form>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const tipoSelect = document.getElementById('tipo');
+    const statusSelect = document.getElementById('status');
+
+    function updateStatusOptions() {
+        const tipo = tipoSelect.value;
+        const currentStatus = statusSelect.value;
+
+        // Limpar opções existentes
+        statusSelect.innerHTML = '';
+
+        // Adicionar opções com base no tipo selecionado
+        if (tipo === 'a pagar') {
+            statusSelect.innerHTML = `
+                <option value="pendente">Pendente</option>
+                <option value="pago">Pago</option>
+            `;
+        } else if (tipo === 'a receber') {
+            statusSelect.innerHTML = `
+                <option value="pendente">Pendente</option>
+                <option value="recebido">Recebido</option>
+            `;
+        }
+
+        // Reselecionar o status atual se ainda for uma opção válida
+        if (statusSelect.querySelector(`option[value="${currentStatus}"]`)) {
+            statusSelect.value = currentStatus;
+        } else {
+            statusSelect.value = 'pendente';
+        }
+    }
+
+    // Atualizar opções quando a página carrega
+    updateStatusOptions();
+
+    // Atualizar opções quando o tipo muda
+    tipoSelect.addEventListener('change', updateStatusOptions);
+});
+</script>
 @endsection

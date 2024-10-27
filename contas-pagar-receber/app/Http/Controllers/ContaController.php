@@ -53,18 +53,14 @@ class ContaController extends Controller
             'descricao' => 'nullable|string',
             'valor' => 'required|numeric',
             'data_vencimento' => 'required|date',
-            'status' => 'required|in:pago,pendente',
+            'status' => 'required|in:pago,recebido,pendente',
+            'tipo' => 'required|in:a pagar,a receber',
         ]);
 
         // Criação de uma nova conta com os dados validados
-        $conta = new Conta();
-        $conta->titulo = $validatedData['titulo'];
-        $conta->descricao = $validatedData['descricao'] ?? null;
-        $conta->valor = $validatedData['valor'];
-        $conta->data_vencimento = $validatedData['data_vencimento'];
-        $conta->status = $validatedData['status'];
+        $conta = new Conta($validatedData);
         $conta->user_id = Auth::id(); // O ID do usuário autenticado
-
+    
         $conta->save();
 
         return redirect()->route('contas.criada')->with('success', 'Conta criada com sucesso!');
@@ -100,16 +96,12 @@ class ContaController extends Controller
             'descricao' => 'nullable|string',
             'valor' => 'required|numeric',
             'data_vencimento' => 'required|date',
-            'status' => 'required|in:pago,pendente',
+            'status' => 'required|in:pago,recebido,pendente',
+            'tipo' => 'required|in:a pagar,a receber',
         ]);
 
         // Atualizando a conta com os dados validados
-        $conta->titulo = $validatedData['titulo'];
-        $conta->descricao = $validatedData['descricao'] ?? null;
-        $conta->valor = $validatedData['valor'];
-        $conta->data_vencimento = $validatedData['data_vencimento'];
-        $conta->status = $validatedData['status'];
-
+        $conta->fill($validatedData);
         $conta->save();
 
         return redirect()->route('contas.index')->with('success', 'Conta atualizada com sucesso!');

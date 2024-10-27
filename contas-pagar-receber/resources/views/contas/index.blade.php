@@ -6,6 +6,7 @@
         <table class="text-gray-400 table-auto border-collapse w-full">
             <thead class="text-left text-gray-200">
                 <tr>
+                    <th class="py-2">Tipo</th>
                     <th class="py-2">Título</th>
                     <th class="py-2">Descrição</th>
                     <th class="py-2">Valor</th>
@@ -18,6 +19,7 @@
             <tbody>
                 @foreach ($contas as $conta)
                 <tr>
+                    <td>{{ $conta->tipo }}</td>
                     <td>{{ $conta->titulo }}</td>
                     <td>{{ $conta->descricao }}</td>
                     <td>{{ $conta->valor }}</td>
