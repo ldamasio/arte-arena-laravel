@@ -19,25 +19,36 @@ Startup Kit do Laravel: Breeze
 
 Após clonar o repositório, entre no diretório do projeto: `cd contas-pagar-receber` (ou use o comando apropriado do seu sistema operacional).
 
-## Instalação das dependências do Backend
+## Instalação das dependências primárias do projeto
 
 ### No Linux:
 ```
 apt update
 apt install php8.3 php8.3-fpm php8.3-common php8.3-mbstring php8.3-curl php8.3-xml php8.3-json php8.3-gd
 apt install nodejs npm
-``` 
+curl -sS https://getcomposer.org/installer | php
+mv composer.phar /usr/local/bin/composer
+```
+
 ### No Windows:
 Utilize um instalador do PHP: Baixe o instalador do PHP para Windows em https://www.php.net/downloads.php e selecione as extensões necessárias (mbstring, curl, xml, json, gd).
+
 Baixe o instalador: Acesse https://nodejs.org/ e baixe o instalador LTS (Long Term Support) para a versão mais recente.
+
 Execute o instalador: Siga as instruções do instalador, certificando-se de marcar a opção para adicionar o Node.js ao PATH do sistema.
+
+Você pode baixar o instalador do Composer no site oficial do Composer (https://getcomposer.org/download/) e executá-lo. Siga as instruções fornecidas pelo instalador para concluir a instalação.
 
 ### No MacOS:
 ```
 brew install php@8.3
 pecl install mbstring curl xml json gd
+brew install composer
 brew install node
 ```
+
+## Instalar dependências do backend
+`composer install`
 
 ## Instalar dependências do frontend
 ```
