@@ -11,7 +11,10 @@ Versão do Composer: 2.8.1
 
 Startup Kit do Laravel: Breeze
 
-# Instalação das dependências
+# Intalação do Sistema
+
+## Instalação das dependências do Backend
+
 ### No Linux:
 ```
 apt update
@@ -30,7 +33,7 @@ pecl install mbstring curl xml json gd
 brew install node
 ```
 
-# Intalação do Sistema
+## Instalar dependências do frontend
 ```
 npm i
 npm run build
@@ -42,7 +45,7 @@ npm run build
 ### Executar Testes automatizados
 `php artisan test`
 
-### Inicializar o Sistema
+## Inicializar o Sistema
 
 ```
 php artisan db:seed
